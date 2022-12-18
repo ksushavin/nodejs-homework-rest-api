@@ -1,8 +1,8 @@
-const { listContacts } = require("../../models/contacts");
+const {Contact} = require("../../models/contact");
 
 const getAll = async (req, res, next) => {
 
-        const result = await listContacts();
+        const result = await Contact.find({});
 
         if (!result) {
             throw new Error();
