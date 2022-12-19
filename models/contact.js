@@ -23,6 +23,8 @@ const contactSchema = new Schema({
   
 }, { versionKey: false, timestamps: true });
 
+const Contact = model("contacts", contactSchema);
+
 contactSchema.post("save", handleMongooseError); //спрацює, якщо валідація пост або пут не пропустить
 
 const addSchema = Joi.object({
@@ -36,7 +38,7 @@ const updateFavoriteSchema = Joi.object({
     favorite: Joi.boolean().required(),
 })
 
-const Contact = model("contacts", contactSchema);
+
 
 const schemas = {
     addSchema,
