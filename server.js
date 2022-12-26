@@ -2,8 +2,10 @@ const app = require('./app')
 const mongoose = require("mongoose");
 
 
-require("dotenv").config();  //creat object from info from file .env and add it to process.env
+require("dotenv").config();  //creat object from info from file .env and add it to process.env, до змінних оточення
 const { DB_HOST, PORT = 3000 } = process.env;
+
+mongoose.set("strictQuery", true);
 
 mongoose.connect(DB_HOST)
   .then(() => {
