@@ -5,7 +5,6 @@ const { validateBody, authenticate } = require("../../middlesweres");
 const { schemas } = require("../../models/user");
 
 
-
 const authRouter = express.Router();
 
 //signup

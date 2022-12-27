@@ -14,13 +14,16 @@ const authenticate = async (req, res, next) => {
 
     try {
         const { id } = jwt.verify(token, SECRET_KEY) // чи шифрували ми цей токен з допом. цього серкет. ключа. Також буде помилка, коли токен застарів
-        const user = await User.findById(id); // тепер знаємо, хто робить запит
+        const user = await User.findById(id); 
         if (!user || !user.token) {
             next(HttpError(401, "Not authorized"))
         }
 
-        req.user = user // додаємо в об'єкт запиту поле користувача
-        next();
+        if (user.token === token) {
+            req.user = user // додаємо в об'єкт запиту поле користувача
+            next();
+        }
+        
     } catch (error) {
         next(HttpError(401, "Not authorized"))
     }   
