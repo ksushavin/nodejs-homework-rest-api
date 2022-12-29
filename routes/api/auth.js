@@ -1,7 +1,7 @@
 const express = require("express");
 const ctrl = require("../../controllers/auth");
 const { ctrlWrapper } = require("../../helpers");
-const { validateBody, authenticate } = require("../../middlesweres");
+const { validateBody, authenticate, upload } = require("../../middlesweres");
 const { schemas } = require("../../models/user");
 
 
@@ -19,5 +19,7 @@ authRouter.post("/logout", authenticate, ctrlWrapper(ctrl.logout));
 
 authRouter.patch("/users", authenticate, validateBody("Ошибка от Joi или другой библиотеки валидации", schemas.updateSubscriptionSchema), ctrlWrapper(ctrl.updateSubscription));
 
+
+authRouter.patch("/avatars", authenticate, upload.single("avatar"), ctrlWrapper(ctrl.updateAvatar))
 
 module.exports = authRouter;
